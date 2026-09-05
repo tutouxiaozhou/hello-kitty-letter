@@ -1,0 +1,377 @@
+/* ============================================
+   RSVP · 回函明信片
+   ============================================ */
+.rsvp-section {
+  padding: 30px 16px 8px;
+}
+
+.postcard {
+  position: relative;
+  background: #fff;
+  border: 3px solid var(--kt-pink);
+  border-radius: 22px;
+  box-shadow: var(--kt-shadow);
+  padding: 18px 16px 20px;
+  /* 明信片分隔线（右上角邮票区） */
+  background-image: linear-gradient(var(--kt-pink-light), var(--kt-pink-light));
+  background-repeat: no-repeat;
+  background-position: right -1px top -1px;
+  background-size: 128px 128px;
+  border-top-right-radius: 22px;
+}
+
+.stamp-zone {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 100px;
+  text-align: center;
+}
+
+.stamp-img {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  margin: 0 auto;
+  background: var(--kt-pink-bg);
+  border: 2.5px dashed var(--kt-pink);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.postmark-svg {
+  width: 104px;
+  height: 104px;
+  margin: -8px auto 0;
+  transform: rotate(-8deg);
+  animation: postmark-stamp 0.4s cubic-bezier(0.2, 1.6, 0.5, 1);
+}
+
+@keyframes postmark-stamp {
+  0% {
+    transform: rotate(-8deg) scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(-8deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.pm-ring {
+  fill: none;
+  stroke: var(--kt-red);
+  stroke-width: 3;
+  opacity: 0.75;
+}
+
+.pm-text {
+  fill: var(--kt-red);
+  font-size: 13px;
+  font-weight: 800;
+  font-family: var(--font-round);
+  opacity: 0.85;
+}
+
+.pm-wave {
+  fill: none;
+  stroke: var(--kt-red);
+  stroke-width: 2.5;
+  opacity: 0.7;
+}
+
+.rsvp-intro {
+  margin: 0 0 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--kt-brown);
+  padding-right: 112px;
+}
+
+.rsvp-intro svg {
+  flex: 0 0 auto;
+  margin-top: 5px;
+}
+
+/* ---------- 表单 ---------- */
+.field-label {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--kt-red-deep);
+}
+
+.attend-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.attend-btn {
+  min-height: 48px;
+  border: 2.5px solid var(--kt-pink);
+  border-radius: 999px;
+  background: var(--kt-pink-bg);
+  color: var(--kt-brown);
+  font-size: 14.5px;
+  font-weight: 800;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.attend-btn[aria-pressed="true"] {
+  background: var(--kt-red);
+  border-color: var(--kt-red-deep);
+  color: #fff;
+  box-shadow: inset 0 -3px 0 rgba(194, 39, 71, 0.5);
+}
+
+.attend-btn:active {
+  transform: translateY(1.5px);
+}
+
+.kt-input {
+  width: 100%;
+  min-height: 48px;
+  border: 2.5px solid var(--kt-pink);
+  border-radius: 14px;
+  background: var(--kt-cream);
+  color: var(--kt-brown);
+  font-family: inherit;
+  font-size: 15px;
+  padding: 10px 14px;
+}
+
+.kt-input::placeholder {
+  color: rgba(161, 121, 107, 0.6);
+}
+
+.kt-input:focus {
+  outline: none;
+  border-color: var(--kt-red);
+  box-shadow: 0 0 0 3px rgba(232, 56, 93, 0.18);
+}
+
+textarea.kt-input {
+  resize: vertical;
+}
+
+.stepper {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.stepper button {
+  width: 52px;
+  min-height: 48px;
+  border: 2.5px solid var(--kt-pink);
+  border-radius: 14px;
+  background: var(--kt-pink-bg);
+  color: var(--kt-brown);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  transition: background 0.15s ease;
+}
+
+.stepper button:hover:not(:disabled) {
+  background: var(--kt-pink-light);
+}
+
+.stepper button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stepper-val {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  border: 2.5px solid var(--kt-pink);
+  border-radius: 14px;
+  background: var(--kt-cream);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--kt-brown);
+  padding: 6px;
+}
+
+.stepper.is-disabled .stepper-val {
+  color: rgba(161, 121, 107, 0.6);
+}
+
+.form-error {
+  margin: 12px 0 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--kt-red-deep);
+  background: var(--kt-pink-bg);
+  border: 2px solid rgba(232, 56, 93, 0.35);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.submit-btn {
+  margin-top: 18px;
+  width: 100%;
+  min-height: 52px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--kt-red) 0%, var(--kt-red-deep) 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 0 rgba(194, 39, 71, 0.35);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.submit-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 rgba(194, 39, 71, 0.35);
+}
+
+/* ---------- 寄送 / 成功 ---------- */
+.send-stage {
+  text-align: center;
+  padding: 6px 0 2px;
+}
+
+.send-status {
+  margin: 14px 0;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--kt-red-deep);
+  animation: send-float 0.9s ease-in-out infinite;
+}
+
+@keyframes send-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.sent-card {
+  background: var(--kt-pink-bg);
+  border: 2.5px solid var(--kt-pink);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: left;
+  animation: card-pop 0.45s cubic-bezier(0.2, 1.4, 0.5, 1);
+}
+
+@keyframes card-pop {
+  0% {
+    transform: scale(0.82);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.sent-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--kt-red-deep);
+}
+
+.sent-desc {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--kt-brown-soft);
+}
+
+.sent-rows {
+  margin: 0;
+}
+
+.sent-rows > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 2px;
+  border-bottom: 2px dashed rgba(255, 177, 200, 0.6);
+  font-size: 13.5px;
+}
+
+.sent-rows dt {
+  color: var(--kt-brown-soft);
+  font-weight: 500;
+  flex: 0 0 auto;
+}
+
+.sent-rows dd {
+  margin: 0;
+  font-weight: 800;
+  color: var(--kt-brown);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* 朋友头像欢呼行 */
+.cheer-row {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.cheer-row img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  animation: cheer-bounce 1.3s ease-in-out infinite;
+}
+
+@keyframes cheer-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.caught-privacy {
+  margin: 12px 0 0;
+  font-size: 11.5px;
+  color: var(--kt-brown-soft);
+}
+
+.ghost-btn {
+  margin-top: 12px;
+  min-height: 44px;
+  padding: 8px 22px;
+  background: #fff;
+  border: 2.5px solid var(--kt-pink);
+  border-radius: 999px;
+  color: var(--kt-brown);
+  font-size: 13.5px;
+  font-weight: 800;
+  transition: background 0.15s ease;
+}
+
+.ghost-btn:hover {
+  background: var(--kt-pink-bg);
+}
+
+@media (min-width: 520px) {
+  .rsvp-section {
+    padding: 34px 24px 8px;
+  }
+}

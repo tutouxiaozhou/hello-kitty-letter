@@ -1,0 +1,118 @@
+/* ============================================
+   全局 token · 基础样式 · Sanrio 红白粉波点风
+   （Baloo 2 由 src/lib/font.ts 注入 @font-face）
+   ============================================ */
+
+:root {
+  --kt-red: #e8385d;
+  --kt-red-deep: #c22747;
+  --kt-pink: #ffb1c8;
+  --kt-pink-light: #ffd9e4;
+  --kt-pink-bg: #ffeef4;
+  --kt-cream: #fff9f5;
+  --kt-brown: #6b4a3e;
+  --kt-brown-soft: #a1796b;
+  --kt-yellow: #f9c931;
+
+  --font-round: "Baloo 2", -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+
+  --kt-shadow: 0 5px 0 rgba(232, 56, 93, 0.16);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-round);
+  color: var(--kt-brown);
+  background-color: var(--kt-pink-bg);
+  /* Kitty 波点墙纸 */
+  background-image: radial-gradient(
+    circle at center,
+    var(--kt-pink-light) 7px,
+    transparent 7.5px
+  );
+  background-size: 42px 42px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--kt-red);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--kt-red);
+  color: #fff;
+}
+
+.page {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- 通用区块 ---------- */
+.section-head {
+  margin: 0 4px 14px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--kt-red-deep);
+  letter-spacing: 1px;
+}
+
+.section-sub {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  color: var(--kt-brown-soft);
+}
+
+/* 花边卡片（扇贝边）：用径向渐变做锯齿边 */
+.scallop-card {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: var(--kt-shadow);
+  position: relative;
+}
+
+/* ---------- 无障碍：减少动态 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

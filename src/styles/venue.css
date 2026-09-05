@@ -1,0 +1,137 @@
+/* ============================================
+   地点 · 小教堂卡片
+   ============================================ */
+.venue-section {
+  padding: 30px 16px 8px;
+}
+
+.venue-card {
+  background: #fff;
+  border: 3px solid var(--kt-pink);
+  border-radius: 22px;
+  box-shadow: var(--kt-shadow);
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.venue-chapel {
+  width: min(78%, 250px);
+  margin: 0 auto 6px;
+}
+
+/* 教堂 SVG 配色 */
+.ch-wall {
+  fill: #fff;
+  stroke: var(--kt-brown);
+  stroke-width: 3;
+}
+
+.ch-roof {
+  fill: var(--kt-red);
+  stroke: var(--kt-brown);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.ch-bow {
+  fill: var(--kt-pink);
+}
+
+.ch-bow-deep {
+  fill: var(--kt-red-deep);
+}
+
+.ch-heart {
+  fill: var(--kt-pink);
+}
+
+.ch-door {
+  fill: var(--kt-red);
+  stroke: var(--kt-brown);
+  stroke-width: 3;
+}
+
+.ch-knob {
+  fill: var(--kt-yellow);
+}
+
+.ch-window {
+  fill: var(--kt-pink-light);
+  stroke: var(--kt-brown);
+  stroke-width: 2.5;
+}
+
+.ch-ground {
+  fill: var(--kt-pink);
+}
+
+.ch-flower {
+  fill: var(--kt-yellow);
+}
+
+.venue-name {
+  margin: 0 0 4px;
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--kt-brown);
+}
+
+.venue-address {
+  margin: 0;
+  font-size: 13px;
+  color: var(--kt-brown-soft);
+}
+
+.venue-transport {
+  margin-top: 14px;
+  border-top: 2.5px dashed var(--kt-pink);
+  padding-top: 12px;
+  text-align: left;
+}
+
+.venue-transport-title {
+  margin: 0 0 10px;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--kt-brown);
+}
+
+.transport-list {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.transport-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--kt-brown);
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+
+.transport-list svg {
+  flex: 0 0 auto;
+  margin-top: 5px;
+}
+
+.venue-service {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--kt-red-deep);
+  background: var(--kt-pink-bg);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+@media (min-width: 520px) {
+  .venue-section {
+    padding: 34px 24px 8px;
+  }
+}

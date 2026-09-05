@@ -1,0 +1,131 @@
+/* ============================================
+   日程 · 花边菜单卡
+   ============================================ */
+.schedule-section {
+  padding: 30px 16px 8px;
+}
+
+.menu-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 3px solid var(--kt-pink);
+  border-radius: 20px;
+  box-shadow: var(--kt-shadow);
+  padding: 12px 14px;
+}
+
+.menu-icon {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  background: var(--kt-pink-bg);
+  border: 2.5px dashed var(--kt-pink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.menu-icon svg {
+  width: 44px;
+  height: 44px;
+}
+
+.mi-stroke {
+  stroke: var(--kt-brown);
+  stroke-width: 3;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.mi-fill {
+  fill: var(--kt-pink);
+  stroke: var(--kt-brown);
+  stroke-width: 3;
+}
+
+.mi-fill-dark {
+  fill: var(--kt-red);
+  stroke: var(--kt-brown);
+  stroke-width: 3;
+}
+
+.mi-ribbon {
+  fill: #fff;
+}
+
+.mi-hole {
+  fill: var(--kt-pink-bg);
+  stroke: var(--kt-brown);
+  stroke-width: 3;
+}
+
+.mi-dot {
+  fill: var(--kt-yellow);
+}
+
+.mi-heart {
+  fill: var(--kt-red);
+}
+
+.menu-info {
+  min-width: 0;
+}
+
+.menu-title {
+  margin: 0 0 3px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--kt-brown);
+}
+
+.menu-no {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--kt-red);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: var(--font-round);
+}
+
+.menu-time {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--kt-red-deep);
+  background: var(--kt-pink-light);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-family: var(--font-round);
+}
+
+.menu-desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--kt-brown-soft);
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 520px) {
+  .schedule-section {
+    padding: 34px 24px 8px;
+  }
+}

@@ -1,0 +1,58 @@
+/* ============================================
+   朋友们 · 官方头像花边墙
+   ============================================ */
+.friends-section {
+  padding: 30px 16px 8px;
+}
+
+.friend-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 8px;
+}
+
+.friend-chip {
+  text-align: center;
+  background: #fff;
+  border: 2.5px solid var(--kt-pink);
+  border-radius: 16px;
+  box-shadow: var(--kt-shadow);
+  padding: 10px 4px 8px;
+}
+
+.friend-chip img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.friend-name {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--kt-brown);
+}
+
+.friend-latin {
+  margin: 0;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--kt-brown-soft);
+  font-family: var(--font-round);
+}
+
+@media (max-width: 400px) {
+  .friend-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 520px) {
+  .friends-section {
+    padding: 34px 24px 8px;
+  }
+}

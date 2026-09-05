@@ -1,0 +1,295 @@
+/* ============================================
+   Hero · 蝴蝶结封印的邀请卡
+   ============================================ */
+.hero {
+  padding: 26px 16px 0;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-kicker {
+  margin: 0 0 12px;
+  font-family: var(--font-round);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 3.5px;
+  color: #fff;
+  background: var(--kt-red);
+  border-radius: 999px;
+  padding: 5px 18px;
+  box-shadow: var(--kt-shadow);
+}
+
+/* ---------- 邀请卡 ---------- */
+.hero-card {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border: 3.5px solid var(--kt-pink);
+  border-radius: 26px;
+  box-shadow: var(--kt-shadow), inset 0 0 0 8px var(--kt-pink-bg);
+  padding: 58px 20px 24px;
+  text-align: center;
+}
+
+/* 卡片花边：上下扇贝边 */
+.hero-card::before,
+.hero-card::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  height: 12px;
+  background: radial-gradient(circle at 8px 0, #fff 7px, transparent 7.5px)
+    repeat-x;
+  background-size: 22px 12px;
+}
+
+.hero-card::before {
+  top: -9px;
+  transform: rotate(180deg);
+}
+
+.hero-card::after {
+  bottom: -9px;
+}
+
+/* 蝴蝶结封印按钮 */
+.bow-seal {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 108px;
+  height: 80px;
+  background: none;
+  border: none;
+  padding: 0;
+  z-index: 2;
+  transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.bow-seal:hover {
+  transform: translateX(-50%) scale(1.06) rotate(-2deg);
+}
+
+.bow-seal:active {
+  transform: translateX(-50%) scale(0.94);
+}
+
+.is-opened .bow-seal {
+  transform: translateX(-50%) rotate(-14deg) translateY(-4px);
+}
+
+.bow-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 6px rgba(194, 39, 71, 0.3));
+}
+
+.bow-wing {
+  fill: var(--kt-red);
+  stroke: var(--kt-red-deep);
+  stroke-width: 2.5;
+}
+
+.bow-tail {
+  fill: #f06584;
+  stroke: var(--kt-red-deep);
+  stroke-width: 2.5;
+}
+
+.bow-knot {
+  fill: var(--kt-red-deep);
+}
+
+.bow-hint {
+  position: absolute;
+  top: 40px;
+  right: 14px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--kt-red);
+  background: var(--kt-pink-light);
+  border-radius: 999px;
+  padding: 3px 10px;
+  animation: hint-pulse 1.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes hint-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.85;
+  }
+}
+
+/* 爱心迸发 */
+.heart-burst {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.heart-fly {
+  position: absolute;
+  top: 30%;
+  animation: heart-fly 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes heart-fly {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-110px) scale(1.15) rotate(18deg);
+  }
+}
+
+/* ---------- Kitty 与气泡 ---------- */
+.hero-kitty-zone {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: end;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.hero-kitty {
+  width: 100%;
+  max-width: 250px;
+  justify-self: center;
+  animation: kitty-sway 3.4s ease-in-out infinite;
+}
+
+@keyframes kitty-sway {
+  0%,
+  100% {
+    transform: rotate(-1.6deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
+}
+
+.bubble {
+  position: relative;
+  align-self: center;
+  background: var(--kt-pink-light);
+  border: 2.5px solid var(--kt-pink);
+  border-radius: 18px;
+  padding: 12px 12px;
+  text-align: left;
+  animation: bubble-bounce 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+@keyframes bubble-bounce {
+  0% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bubble-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 800;
+  color: var(--kt-red-deep);
+  text-wrap: balance;
+}
+
+.bubble-tail {
+  position: absolute;
+  left: -9px;
+  bottom: 16px;
+  width: 16px;
+  height: 16px;
+  background: var(--kt-pink-light);
+  border-left: 2.5px solid var(--kt-pink);
+  border-bottom: 2.5px solid var(--kt-pink);
+  transform: rotate(45deg);
+}
+
+.bubble-btn {
+  margin: 0 auto 18px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--kt-red) 0%, var(--kt-red-deep) 100%);
+  color: #fff;
+  font-size: 15.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 8px 28px;
+  box-shadow: 0 5px 0 rgba(194, 39, 71, 0.35);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.bubble-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 rgba(194, 39, 71, 0.35);
+}
+
+.hero-title {
+  margin: 0 0 8px;
+  font-size: clamp(22px, 6vw, 27px);
+  font-weight: 800;
+  color: var(--kt-brown);
+}
+
+.hero-names {
+  margin: 0 0 2px;
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--kt-red-deep);
+  letter-spacing: 2px;
+}
+
+.amp {
+  margin: 0 4px;
+  font-size: 20px;
+}
+
+.hero-date {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--kt-brown-soft);
+  letter-spacing: 1px;
+}
+
+.hero-demo {
+  margin: 12px 0 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--kt-brown);
+}
+
+@media (min-width: 520px) {
+  .hero {
+    padding: 34px 24px 0;
+  }
+}
