@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { INVITATION } from "../config";
 import { asset } from "../lib/asset";
 import { prefersReducedMotion } from "../lib/motion";
+import { Letter } from "./Letter";
 import { Bow, Heart } from "./decorations";
 import "../styles/hero.css";
 
@@ -36,29 +37,69 @@ function HeartBurst({ show }: { show: boolean }) {
 }
 
 export function Hero() {
-  const { couple, date, dateLunar, hero } = INVITATION;
+  const { couple, date, dateLunar, hero, venue, schedule } = INVITATION;
   const [opened, setOpened] = useState(false);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = 0.35;
+    return () => audio.pause();
+  }, []);
+
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      try {
+        await audio.play();
+        setMusicPlaying(true);
+      } catch {
+        setMusicPlaying(false);
+      }
+      return;
+    }
+
+    audio.pause();
+    setMusicPlaying(false);
+  };
 
   return (
     <section className="hero" aria-label="Hello Kitty 风格婚礼邀请首屏">
       <div className="hero-inner">
-        <p className="hero-kicker">{hero.kicker}</p>
-
         <div className={`hero-card ${opened ? "is-opened" : ""}`}>
+          <audio ref={audioRef} src={asset("music/the-afternoon-vow.mp3")} loop preload="metadata" />
+          <button
+            type="button"
+            className={`music-toggle ${musicPlaying ? "is-playing" : ""}`}
+            aria-pressed={musicPlaying}
+            aria-label={musicPlaying ? "关闭背景音乐" : "播放背景音乐"}
+            onClick={toggleMusic}
+          >
+            <span className="music-toggle-icon" aria-hidden="true">♪</span>
+          </button>
           {/* 蝴蝶结封印：点一下拆开 */}
           <button
             type="button"
             className="bow-seal"
-            aria-pressed={opened}
-            aria-label={opened ? "蝴蝶结已拆开" : `拆开蝴蝶结封印：${hero.bowHint}`}
+            aria-expanded={opened}
+            aria-controls="hero-letter"
+            aria-label={opened ? hero.againBtn : `拆开蝴蝶结封印：${hero.bowHint}`}
             onClick={() => setOpened((v) => !v)}
           >
             <Bow className="bow-svg" />
           </button>
           <HeartBurst show={opened} />
-          <span className="bow-hint" aria-hidden="true">
-            {opened ? "" : hero.bowHint}
-          </span>
+          <p className="hero-title">{hero.title}</p>
+          <h1 className="hero-names">
+            <span>{couple.a}</span><span className="amp" aria-label="与">♡</span><span>{couple.b}</span>
+          </h1>
+          <p className="hero-date"><time dateTime={date}>{date.split("-").join(".")}</time></p>
+          <p className="hero-lunar">{dateLunar}</p>
+          <p className="hero-venue">{venue}<br /><span>{schedule[0].time} {hero.welcomeLabel}</span></p>
 
           <div className="hero-kitty-zone">
             <img
@@ -73,23 +114,19 @@ export function Hero() {
             </div>
           </div>
 
-          <button
-            type="button"
-            className="bubble-btn"
-            onClick={() => setOpened((v) => !v)}
-          >
-            {opened ? `🎀 ${hero.againBtn}` : `🎀 ${hero.yesBtn}`}
-          </button>
-
-          <h1 className="hero-title">{hero.title}</h1>
-          <p className="hero-names">
-            {couple.a} <span className="amp">♡</span> {couple.b}
-          </p>
-          <p className="hero-date">
-            {date} · {dateLunar}
-          </p>
+          <div className="hero-actions">
+            <button type="button" className="bubble-btn"
+              aria-expanded={opened} aria-controls="hero-letter"
+              onClick={() => setOpened((v) => !v)}>
+              {opened ? hero.againBtn : hero.yesBtn}
+            </button>
+            <a className="hero-reply" href="#rsvp">{hero.replyLink}</a>
+          </div>
+          <a className="hero-location-link" href="#venue">{hero.venueLink}</a>
         </div>
-        <p className="hero-demo">※ 本页为演示资料，非官方粉丝作品</p>
+      </div>
+      <div id="hero-letter" className="hero-letter" hidden={!opened}>
+        <Letter />
       </div>
     </section>
   );

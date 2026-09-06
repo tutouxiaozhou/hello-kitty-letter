@@ -17,22 +17,33 @@ export interface Friend {
   wish: string;
 }
 
+/** 婚礼日期（ISO）。改这一处，全站日期文案自动联动 */
+const WEDDING_DATE = "2026-10-06";
+
+/** 「10 月 6 日」形式的中文短日期，供各处文案复用，避免硬编码 */
+export const dateText = (() => {
+  const [, month, day] = WEDDING_DATE.split("-");
+  return `${Number(month)} 月 ${Number(day)} 日`;
+})();
+
 export const INVITATION = {
   /** 新人（演示名，禁止真实姓名） */
   couple: { a: "阿澄", b: "小满" },
-  date: "2026-10-06",
+  date: WEDDING_DATE,
   dateLunar: "农历八月廿六 · 星期二",
   venue: "云栖礼堂 · 星洲厅",
   address: "演示城市 · 云栖路 88 号",
 
   /** 首屏：Kitty 的对话气泡 + 蝴蝶结封印 */
   hero: {
-    kicker: "HELLO KITTY WEDDING LETTER",
     title: "Kitty 为你送来一封喜帖",
     bubbleAsk: "要来参加阿澄和小满的婚礼吗？",
-    bubbleYes: "耶！那就 10 月 6 日，云栖礼堂见哦！",
-    yesBtn: "好呀！",
-    againBtn: "再问一次",
+    bubbleYes: "信纸展开啦，读读我为新人写下的邀请吧。",
+    yesBtn: "拆开喜帖",
+    againBtn: "收起信纸",
+    replyLink: "填写回函",
+    venueLink: "查看地点",
+    welcomeLabel: "迎宾",
     bowHint: "点一下蝴蝶结封印",
   },
 
@@ -84,7 +95,7 @@ export const INVITATION = {
   /** 朋友们 */
   friends: {
     title: "他们也会来哦",
-    sub: " Kitty 的朋友们全体出席，就差你了",
+    sub: "点选一位朋友，读一封送给新人的祝福",
     list: [
       { name: "丹尼尔", latin: "Dear Daniel", face: asset("ip/face-daniel.png"), wish: "我看着 Kitty 筹备这场婚礼的样子，就像看见当年的我们。到时见，兄弟。" },
       { name: "美乐蒂", latin: "My Melody", face: asset("ip/face-mymelody.png"), wish: "我会戴上最粉色的小帽子去！甜品台记得给我留草莓的那块～" },
@@ -99,13 +110,39 @@ export const INVITATION = {
 
   /** 地点与交通 */
   venueInfo: {
-    transportTitle: "怎么来教堂最方便",
+    subtitle: "沿着花开的小径，来赴我们的约定",
+    transportTitle: "赴约路线",
+    transportLabels: ["地铁", "公交", "自驾"],
     transport: [
-      "地铁 2 号线「云栖站」B 口，步行约 400 米",
-      "公交 88 路 / 206 路「云栖礼堂」站，下车即达",
-      "自驾：礼堂北侧地面停车场，凭本页请柬免费停车",
+      "2 号线「云栖站」B 口，步行约 400 米",
+      "88 路 / 206 路「云栖礼堂」站，下车即达",
+      "礼堂北侧地面停车场，凭本页请柬免费停车",
     ],
     service: "一楼休息区备有茶水与点心——像 Kitty 家的厨房一样温暖",
+  },
+
+  /** Kitty 的互动小礼物 */
+  garden: {
+    title: "Kitty 的祝福花园",
+    sub: "给花儿浇三次水，把今天的甜蜜慢慢养大",
+    steps: ["第一朵花探出脑袋啦", "第二朵花也害羞地开了", "花园已经开满祝福"],
+    water: "浇一浇小花",
+    done: "花开啦！愿你们以后的每一天，都像苹果花一样又甜又亮。",
+    again: "再看一次花开",
+    reply: "把祝福写进回函",
+  },
+
+  luckyDraw: {
+    title: "拆一张幸运祝福签",
+    sub: "Kitty 把三句祝福藏在小信封里，抽一张带走吧",
+    action: "抽一张祝福签",
+    again: "再抽一张",
+    hints: ["甜甜相伴", "一路有光", "幸福加倍"],
+    wishes: [
+      "愿每一个平常的早晨，都有一句‘早安’在等你。",
+      "愿你们把喜欢装进日常，把浪漫留给彼此。",
+      "愿未来所有好消息，都有人和你一起庆祝。",
+    ],
   },
 
   /** RSVP = 回函明信片 */
@@ -122,8 +159,8 @@ export const INVITATION = {
     submit: "寄出回函明信片",
     sending: "明信片正在路上……",
     successTitle: "收到你的祝福啦！",
-    successDesc: "Kitty 已经把回函贴在冰箱上啦，10 月 6 日见！",
-    privacy: "记录仅保存在本机浏览器（纯前端演示），不会发送任何数据。",
+    successDesc: `Kitty 已经把回函贴在冰箱上啦，${dateText}见！`,
+    absentSuccessDesc: "心意已经收好啦，谢谢你送给新人的祝福。",
     reset: "重新填写",
     rows: {
       status: "状态",

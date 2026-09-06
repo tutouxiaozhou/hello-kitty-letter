@@ -1,63 +1,45 @@
-/* ============================================
-   Hero · 蝴蝶结封印的邀请卡
-   ============================================ */
-.hero {
-  padding: 26px 16px 0;
-}
-
-.hero-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hero-kicker {
-  margin: 0 0 12px;
-  font-family: var(--font-round);
-  font-weight: 800;
-  font-size: 12px;
-  letter-spacing: 3.5px;
-  color: #fff;
-  background: var(--kt-red);
-  border-radius: 999px;
-  padding: 5px 18px;
-  box-shadow: var(--kt-shadow);
-}
-
-/* ---------- 邀请卡 ---------- */
+.hero { padding: calc(54px + env(safe-area-inset-top)) var(--page-gutter) 0; }
+.hero-inner { display: flex; flex-direction: column; align-items: center; }
 .hero-card {
-  position: relative;
-  width: 100%;
-  background: #fff;
-  border: 3.5px solid var(--kt-pink);
-  border-radius: 26px;
-  box-shadow: var(--kt-shadow), inset 0 0 0 8px var(--kt-pink-bg);
-  padding: 58px 20px 24px;
-  text-align: center;
+  position: relative; width: 100%; background: #fff;
+  border: 2px solid var(--kt-pink); border-bottom: 0; border-radius: 24px;
+  box-shadow: 0 12px 32px rgba(137, 55, 76, .08), inset 0 0 0 6px #fff5f7;
+  /* 顶部留白需容纳绝对定位的蝴蝶结（底部约 42px）+ 投影，避免压住 hero-title */
+  padding: clamp(66px, 13.5vw, 74px) clamp(20px, 6vw, 32px) 22px; text-align: center;
 }
 
-/* 卡片花边：上下扇贝边 */
-.hero-card::before,
-.hero-card::after {
-  content: "";
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  height: 12px;
-  background: radial-gradient(circle at 8px 0, #fff 7px, transparent 7.5px)
-    repeat-x;
-  background-size: 22px 12px;
+/* 背景音乐默认关闭，必须由访客主动点按开启 */
+.music-toggle {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  color: var(--kt-red-deep);
+  background: rgba(255, 247, 250, .94);
+  border: 1.5px solid var(--kt-pink);
+  border-radius: 50%;
+  font-size: 21px;
+  line-height: 1;
+  box-shadow: 0 5px 16px rgba(137, 55, 76, .18);
+  backdrop-filter: blur(8px);
+  transition: background .2s ease, color .2s ease, transform .2s ease;
 }
 
-.hero-card::before {
-  top: -9px;
-  transform: rotate(180deg);
-}
+.music-toggle:hover { transform: translateY(-1px); background: var(--kt-pink-bg); }
+.music-toggle:active { transform: translateY(0) scale(.96); }
+.music-toggle.is-playing { color: #fff; background: var(--kt-red-deep); border-color: var(--kt-red-deep); }
+.music-toggle-icon { display: block; width: 1em; text-align: center; }
+.music-toggle.is-playing .music-toggle-icon { animation: music-spin 1.8s linear infinite; }
 
-.hero-card::after {
-  bottom: -9px;
+@keyframes music-spin {
+  to { transform: rotate(360deg); }
 }
-
 /* 蝴蝶结封印按钮 */
 .bow-seal {
   position: absolute;
@@ -70,7 +52,7 @@
   border: none;
   padding: 0;
   z-index: 2;
-  transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1);
+  transition: transform 0.25s cubic-bezier(.16, 1, .3, 1);
 }
 
 .bow-seal:hover {
@@ -107,32 +89,6 @@
   fill: var(--kt-red-deep);
 }
 
-.bow-hint {
-  position: absolute;
-  top: 40px;
-  right: 14px;
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--kt-red);
-  background: var(--kt-pink-light);
-  border-radius: 999px;
-  padding: 3px 10px;
-  animation: hint-pulse 1.6s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes hint-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.06);
-    opacity: 0.85;
-  }
-}
-
 /* 爱心迸发 */
 .heart-burst {
   position: absolute;
@@ -163,133 +119,32 @@
   }
 }
 
-/* ---------- Kitty 与气泡 ---------- */
-.hero-kitty-zone {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  align-items: end;
-  gap: 6px;
-  margin-bottom: 14px;
-}
 
-.hero-kitty {
-  width: 100%;
-  max-width: 250px;
-  justify-self: center;
-  animation: kitty-sway 3.4s ease-in-out infinite;
-}
-
-@keyframes kitty-sway {
-  0%,
-  100% {
-    transform: rotate(-1.6deg);
-  }
-  50% {
-    transform: rotate(1.6deg);
-  }
-}
-
-.bubble {
-  position: relative;
-  align-self: center;
-  background: var(--kt-pink-light);
-  border: 2.5px solid var(--kt-pink);
-  border-radius: 18px;
-  padding: 12px 12px;
-  text-align: left;
-  animation: bubble-bounce 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
-}
-
-@keyframes bubble-bounce {
-  0% {
-    transform: scale(0.85);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.bubble-text {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.7;
-  font-weight: 800;
-  color: var(--kt-red-deep);
-  text-wrap: balance;
-}
-
-.bubble-tail {
-  position: absolute;
-  left: -9px;
-  bottom: 16px;
-  width: 16px;
-  height: 16px;
-  background: var(--kt-pink-light);
-  border-left: 2.5px solid var(--kt-pink);
-  border-bottom: 2.5px solid var(--kt-pink);
-  transform: rotate(45deg);
-}
-
-.bubble-btn {
-  margin: 0 auto 18px;
-  display: inline-flex;
-  align-items: center;
-  min-height: 48px;
-  border: none;
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--kt-red) 0%, var(--kt-red-deep) 100%);
-  color: #fff;
-  font-size: 15.5px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  padding: 8px 28px;
-  box-shadow: 0 5px 0 rgba(194, 39, 71, 0.35);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
-
-.bubble-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 rgba(194, 39, 71, 0.35);
-}
-
-.hero-title {
-  margin: 0 0 8px;
-  font-size: clamp(22px, 6vw, 27px);
-  font-weight: 800;
-  color: var(--kt-brown);
-}
-
-.hero-names {
-  margin: 0 0 2px;
-  font-size: 25px;
-  font-weight: 800;
-  color: var(--kt-red-deep);
-  letter-spacing: 2px;
-}
-
-.amp {
-  margin: 0 4px;
-  font-size: 20px;
-}
-
-.hero-date {
-  margin: 0 0 14px;
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--kt-brown-soft);
-  letter-spacing: 1px;
-}
-
-.hero-demo {
-  margin: 12px 0 0;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--kt-brown);
-}
-
-@media (min-width: 520px) {
-  .hero {
-    padding: 34px 24px 0;
-  }
+.hero-title { margin: 0 0 10px; font-size: 15px; font-weight: 600; color: var(--kt-brown-soft); }
+.hero-names { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 0; font-size: clamp(32px, 8.5vw, 46px); line-height: 1.35; color: var(--kt-red-deep); font-weight: 800; overflow-wrap: anywhere; }
+.hero-names > span { min-width: 0; max-width: 100%; }
+.amp { font-size: 22px; font-weight: 600; }
+.hero-date { margin: 18px 0 0; font-size: 23px; font-weight: 800; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
+.hero-lunar { margin: 0; font-size: 14px; color: var(--kt-brown-soft); }
+.hero-venue { margin: 14px 0 20px; font-size: 16px; font-weight: 600; }
+.hero-venue span { font-size: 14px; color: var(--kt-brown-soft); font-weight: 400; }
+.hero-kitty-zone { display: grid; grid-template-columns: 104px 1fr; align-items: center; gap: 14px; max-width: 350px; margin: 0 auto 20px; }
+.hero-kitty { width: 104px; }
+.bubble { position: relative; background: #fff1f5; border-radius: 16px; padding: 12px; text-align: left; }
+.bubble-text { margin: 0; font-size: 14px; line-height: 1.7; color: var(--kt-red-deep); }
+.bubble-tail { position: absolute; left: -6px; top: 45%; width: 12px; height: 12px; background: #fff1f5; transform: rotate(45deg); }
+.hero-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.bubble-btn, .hero-reply { display: flex; align-items: center; justify-content: center; min-height: 48px; border: 1px solid var(--kt-red-deep); border-radius: 999px; padding: 10px; font-size: 15px; font-weight: 800; text-decoration: none; transition: background .2s ease; }
+.bubble-btn { background: var(--kt-red-deep); color: #fff; }
+.bubble-btn:hover { background: #a91f3b; }
+.hero-reply { color: var(--kt-red-deep); background: #fff; }
+.hero-reply:hover { background: var(--kt-pink-bg); }
+.hero-location-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; font-size: 14px; color: var(--kt-brown-soft); text-underline-offset: 4px; }
+.hero-letter .letter-section { padding: 28px 0 0; }
+.hero-letter:not([hidden]) { animation: letter-open .45s cubic-bezier(.16, 1, .3, 1); transform-origin: top center; }
+@keyframes letter-open { from { opacity: .5; transform: translateY(-8px); clip-path: inset(0 0 35%); } to { opacity: 1; transform: translateY(0); clip-path: inset(0); } }
+@media (min-width: 900px) {
+  .page > .hero { padding: calc(72px + env(safe-area-inset-top)) 0 8px; }
+  .hero-inner,
+  .hero-letter { width: min(100%, 640px); margin-inline: auto; }
 }

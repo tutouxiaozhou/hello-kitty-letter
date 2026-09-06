@@ -26,3 +26,10 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright 工具产物与截图
+.playwright-cli
+output/
+
+# 本地工作区 AI 记忆（不入库）
+.workbuddy/

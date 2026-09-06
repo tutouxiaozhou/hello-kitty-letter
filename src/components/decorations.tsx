@@ -113,43 +113,6 @@ export function MiniIcon({ kind }: { kind: "flag" | "rings" | "camera" | "cake" 
   }
 }
 
-/** Kitty 家的小教堂（原创扁平 SVG） */
-export function Chapel({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 220 170" aria-hidden="true">
-      {/* 身体 */}
-      <rect className="ch-wall" x="45" y="78" width="130" height="82" rx="6" />
-      {/* 屋顶 */}
-      <path className="ch-roof" d="M34 82 L110 26 L186 82 Z" />
-      {/* 尖塔 */}
-      <rect className="ch-wall" x="98" y="4" width="24" height="30" rx="4" />
-      <path className="ch-roof" d="M94 8 L110 -10 L126 8 Z" />
-      {/* 塔顶蝴蝶结 */}
-      <g transform="translate(110 -12) scale(0.16)">
-        <circle className="ch-bow" cx="-16" cy="0" r="12" />
-        <circle className="ch-bow" cx="16" cy="0" r="12" />
-        <circle className="ch-bow-deep" cx="0" cy="0" r="7" />
-      </g>
-      {/* 心形彩窗 */}
-      <path
-        className="ch-heart"
-        d="M110 92 c0-6-6.6-8.6-10.3-4.2 C96 83.4 89.4 86 89.4 92 c0 6.6 10.3 13 10.3 13 s10.3-6.4 10.3-13 Z"
-      />
-      {/* 大门 */}
-      <path className="ch-door" d="M96 160 L96 122 C96 110 124 110 124 122 L124 160 Z" />
-      <circle className="ch-knob" cx="119" cy="138" r="2.5" />
-      {/* 窗户 */}
-      <rect className="ch-window" x="58" y="98" width="20" height="26" rx="9" />
-      <rect className="ch-window" x="142" y="98" width="20" height="26" rx="9" />
-      {/* 地面 */}
-      <rect className="ch-ground" x="20" y="158" width="180" height="7" rx="3.5" />
-      {/* 小花 */}
-      <circle className="ch-flower" cx="30" cy="150" r="5" />
-      <circle className="ch-flower" cx="192" cy="150" r="5" />
-    </svg>
-  );
-}
-
 /** 邮戳（圆环 + 波浪线） */
 export function Postmark({ text }: { text: string }) {
   return (

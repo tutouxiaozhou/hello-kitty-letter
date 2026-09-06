@@ -1,58 +1,17 @@
-/* ============================================
-   朋友们 · 官方头像花边墙
-   ============================================ */
-.friends-section {
-  padding: 30px 16px 8px;
-}
-
-.friend-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px 8px;
-}
-
-.friend-chip {
-  text-align: center;
-  background: #fff;
-  border: 2.5px solid var(--kt-pink);
-  border-radius: 16px;
-  box-shadow: var(--kt-shadow);
-  padding: 10px 4px 8px;
-}
-
-.friend-chip img {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  margin: 0 auto;
-}
-
-.friend-name {
-  margin: 6px 0 0;
-  font-size: 12.5px;
-  font-weight: 800;
-  color: var(--kt-brown);
-}
-
-.friend-latin {
-  margin: 0;
-  font-size: 9.5px;
-  font-weight: 600;
-  color: var(--kt-brown-soft);
-  font-family: var(--font-round);
-}
-
-@media (max-width: 400px) {
-  .friend-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 520px) {
-  .friends-section {
-    padding: 34px 24px 8px;
-  }
+.friends-section { padding: var(--section-gap) var(--page-gutter) 0; }
+.friend-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 6px; }
+.friend-chip { width: 100%; min-height: 96px; border: 1px solid transparent; border-radius: 12px; padding: 8px 2px 7px; background: transparent; color: var(--kt-brown); text-align: center; transition: background .2s ease; }
+.friend-chip:hover { background: #fff; }
+.friend-chip[aria-pressed="true"] { background: #fff; border-color: var(--kt-red-deep); }
+.friend-chip img { width: 44px; height: 44px; object-fit: contain; margin: 0 auto 5px; }
+.friend-name { display: block; font-size: 13px; font-weight: 600; }
+.friend-selected { display: block; margin-top: 2px; font-size: 12px; color: var(--kt-brown-soft); }
+.friend-chip[aria-pressed="true"] .friend-selected { color: var(--kt-red-deep); }
+.friend-wish { margin-top: 14px; padding: 16px 18px; min-height: 112px; background: #fff; border-radius: 6px 6px 18px 18px; box-shadow: var(--kt-shadow); font-size: 15px; line-height: 1.75; }
+.friend-wish p { margin: 0; }
+.friend-wish .friend-signature { margin-top: 12px; display: flex; align-items: center; justify-content: flex-end; gap: 6px; color: var(--kt-red-deep); font-size: 14px; }
+@media (min-width: 520px) { .friends-section { padding-inline: var(--page-gutter); } }
+@media (max-width: 340px) {
+  .friend-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .friend-chip { min-height: 90px; }
 }

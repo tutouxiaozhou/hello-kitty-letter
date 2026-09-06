@@ -1,52 +1,125 @@
-# Hello Kitty 信笺婚礼请柬（Hello Kitty Letter Wedding Invitation）
+# Hello Kitty 信笺婚礼请柬
 
-以 Hello Kitty 信笺为载体的婚礼请柬单页演示。整页 = Kitty 亲手写给你的喜帖，三丽鸥红白粉波点视觉：
+一个可以直接改成自己婚礼信息的电子请柬网页。它使用 Vite、React 和 TypeScript 制作；不需要数据库，也不会把回函发送到任何服务器。
 
-- **首屏**：白色花边邀请卡 + 卡顶可点击的**红色大蝴蝶结封印**（点一下拆封：蝴蝶结歪头 + 爱心迸发 + Kitty 气泡从提问「要来参加婚礼吗？」切换成「耶！那就 10 月 6 日见哦！」）；Kitty 官方立绘（蓝背带裤+苹果+牛奶）轻摇出场。
-- **邀请词**：粉色横线信纸，落款「你们的朋友 Hello Kitty」。
-- **日程**：花边菜单卡（01–05），配三丽鸥扁平风原创小图标（旗帜/戒指/相机/蛋糕/礼物）。
-- **朋友墙**：8 位伙伴**官方头像**（丹尼尔、美乐蒂、玉桂狗、酷洛米、布丁狗、帕恰狗、山姆企鹅、大眼蛙）。
-- **地点**：原创扁平小教堂插画（红屋顶+心形彩窗+塔顶蝴蝶结）+ 爱心交通列表。
-- **RSVP**：回函明信片——右上角 Kitty 官方头像邮票，提交后盖下「云栖邮便」圆形邮戳，成功态 + 伙伴头像欢呼行。
-- 全站配色：Kitty 红 `#E8385D` / 樱粉 `#FFB1C8` / 奶白，波点墙纸底 + 花边卡片 + 底部实体投影；拉丁与数字使用 Baloo 2 圆体。
+页面包含：可展开的请柬、婚礼地点和交通、流程表、恋爱手账、朋友祝福、互动花园、祝福签、回函，以及默认关闭的背景音乐按钮。
 
-技术栈：Vite + React 18 + TypeScript，无 UI 框架、无路由、纯 CSS。纯前端本地状态，**不发生任何网络请求**。
+> 这是 Hello Kitty 风格的非官方演示作品。页面中的姓名、日期、地点均为演示资料，请替换成自己的信息后再使用。
 
-## 常用命令
+## 先跑起来
+
+### 1. 安装 Node.js
+
+先安装 Node.js 的长期支持版（LTS）。安装完成后，在终端运行：
+
+```bash
+node -v
+npm -v
+```
+
+能看到版本号就说明准备好了。
+
+### 2. 安装依赖
+
+打开终端，进入本项目文件夹后运行：
 
 ```bash
 npm install --no-audit --no-fund
-npm run dev       # 本地开发
-npm run build     # 产出 dist/（tsc + vite build）
-npm run preview   # 预览构建产物
 ```
 
-## 如何换新人信息
+这一步只需要在第一次运行项目时执行。
 
-所有页面文案均读取自 `src/config.ts` 的 `INVITATION` 对象，**只改配置即可换租户，不需要动组件**：
+### 3. 启动网页
 
-| 字段 | 说明 |
+```bash
+npm run dev
+```
+
+终端会显示一个本地地址，通常是 `http://localhost:5173/`。在浏览器打开它，就能看到请柬。修改代码后，网页会自动刷新。
+
+## 最常用的操作
+
+| 你想做什么 | 怎么做 |
 | --- | --- |
-| `couple.a` / `couple.b` | 新人名（首屏、气泡台词联动） |
-| `date` / `dateLunar` | 婚礼日期与农历 |
-| `venue` / `address` | 场地与地址 |
-| `hero` | 首屏 kicker / 标题 / 气泡两句台词 / 按钮文案 / 蝴蝶结提示 |
-| `letter` | 信件正文与落款（建议正文 60–120 字） |
-| `schedule[]` | 流程条目：`no`、`time`、`title`、`desc`、`icon`（`flag|rings|camera|cake|gift`） |
-| `friends` | 朋友墙标题与头像列表（`name`/`latin`/`face`） |
-| `venueInfo` | 交通列表与休息区文案 |
-| `rsvp` | RSVP 全部文案与校验提示（含邮戳文字） |
-| `fanNote` / `demoNote` | 页脚固定两行 |
+| 本地查看和修改 | `npm run dev` |
+| 检查项目能否正常打包 | `npm run build` |
+| 预览打包后的版本 | `npm run preview` |
 
-## 素材来源清单
+`npm run build` 成功后，会生成 `dist/` 文件夹；它就是可部署的网站文件。
 
-Hello Kitty 主视觉与 9 张角色头像均为三丽鸥日本官网素材，已本地化，逐项 URL 见 [public/assets/ip/README.md](public/assets/ip/README.md)。
+## 只改这一个文件，就能换成你的请柬
 
-以下视觉为**原创绘制**（无外部素材）：大蝴蝶结封印与页脚蝴蝶结、爱心彩纸、日程小图标、小教堂插画、邮戳。字体 Baloo 2（OFL）仅取拉丁子集本地化。
+打开 [src/config.ts](src/config.ts)，找到 `INVITATION` 对象。绝大多数文字都集中在这里，不需要修改组件代码。
 
-## 无障碍与适配
+建议按这个顺序修改：
 
-- 触控目标 ≥ 44px，交互控件均带 `aria-label` / `aria-pressed` / `role`；气泡与提交状态用 `role="status"` + `aria-live` 播报。
-- 全站动画（Kitty 摇摆、爱心迸发、明信片漂浮、邮戳盖下、伙伴欢呼）尊重 `prefers-reduced-motion`：CSS 关键帧被压平，JS 动画自动跳最终态。
-- 中文正文使用系统字体栈（PingFang SC / Noto Sans SC 等）；拉丁与数字使用 Baloo 2 圆体。
-- 边界兜底：超长姓名 `overflow-wrap: anywhere` 并限 16 字，人数步进 1–6 边界禁用，空祝福显示「—」，姓名为空提交给出错误提示。
+1. 改 `couple.a` 和 `couple.b`：新人姓名。
+2. 改 `date`、`dateLunar`：婚礼日期与农历/星期。
+3. 改 `venue`、`address`：场地名称与地址。
+4. 改 `schedule`：当天流程、时间和说明。
+5. 改 `letter`、`hero`、`rsvp`：首屏、邀请词和回函里的文案。
+
+常用字段说明：
+
+| 字段 | 用途 |
+| --- | --- |
+| `couple` | 两位新人的姓名 |
+| `date` / `dateLunar` | 日期；`date` 请保持 `YYYY-MM-DD` 格式，例如 `2026-10-06` |
+| `venue` / `address` | 场地名称和详细地址 |
+| `hero` | 首屏标题、气泡文字、按钮文字 |
+| `letter` | 展开请柬后的正文与落款 |
+| `schedule` | 流程表；每一项有时间、标题和说明 |
+| `venueInfo` | 交通方式和地点服务提示 |
+| `friends` | 好友头像和祝福文字 |
+| `rsvp` | 回函表单的标题、按钮与成功提示 |
+
+## 文件大致都放在哪里
+
+```text
+src/
+├── config.ts          # 最常改：请柬文字与日期、地点等信息
+├── components/        # 每个页面区块，例如首屏、地点、回函
+├── styles/            # 每个区块对应的样式文件
+└── App.tsx            # 页面区块的排列顺序
+
+public/assets/
+├── music/             # 背景音乐；目前使用 the-afternoon-vow.mp3
+├── ip/                # Hello Kitty 与朋友头像素材
+└── journal/           # 手账区的插画
+```
+
+## 换背景音乐
+
+把自己的 MP3 文件放到 `public/assets/music/`，然后在 [src/components/Hero.tsx](src/components/Hero.tsx) 中找到：
+
+```tsx
+asset("music/the-afternoon-vow.mp3")
+```
+
+把文件名替换成你的即可。页面默认不会自动播放音乐，访客需要主动点击右下角的音乐按钮。
+
+## 回函数据会去哪？
+
+当前版本的回函只是前端演示：填写内容只存在访客当前浏览器页面中，刷新后会消失，不会发送或保存到任何地方。
+
+如果你希望真正收集回函，需要后续接入表单服务或后端。
+
+## 素材与版权说明
+
+Hello Kitty 主视觉和角色头像已本地放在 `public/assets/ip/` 中，逐项来源链接见 [public/assets/ip/README.md](public/assets/ip/README.md)。其余的教堂、流程图标、手账插画与装饰图形为项目原创绘制。
+
+在公开发布或商业使用前，请确认你拥有所用角色素材、图片和音乐的相应授权。
+
+## 常见问题
+
+### 运行 `npm run dev` 后打不开网页？
+
+确认终端中没有报错，并复制它显示的完整地址到浏览器打开。若 `5173` 已被占用，终端会给出一个新的端口地址，使用新地址即可。
+
+### 我改了内容，网页没有变化？
+
+先保存文件，再刷新浏览器；开发模式通常会自动刷新。若仍未变化，确认修改的是 `src/config.ts`，而不是其他同名项目文件夹里的文件。
+
+### 我只想换文字，不想碰代码？
+
+只编辑 `src/config.ts` 里的引号内容即可；不要删掉字段名、逗号或大括号。

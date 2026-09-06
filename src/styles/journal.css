@@ -1,13 +1,13 @@
 /* Kitty 手账时间线 */
-.journal-section { padding: 30px 0 10px; }
+.journal-section { padding: var(--section-gap) var(--page-gutter) 0; }
 .journal-pages { list-style: none; margin: 0 auto; padding: 0; max-width: 560px; display: grid; gap: 20px; }
 .journal-page {
   position: relative;
-  display: flex; gap: 16px; align-items: center;
+  display: flex; gap: 14px; align-items: center;
   background: linear-gradient(180deg, #fffdfb, #fff4f6);
   border: 1.5px solid #f6ccd8;
   border-radius: 6px;
-  padding: 18px 16px;
+  padding: 16px 14px;
   box-shadow: 0 8px 18px rgba(226, 138, 165, 0.16);
 }
 .journal-page--l { transform: rotate(-0.7deg); }
@@ -21,7 +21,7 @@
 .journal-tape--1 { background: rgba(178, 214, 246, 0.6); transform: rotate(2.5deg); }
 .journal-tape--2 { background: rgba(255, 222, 152, 0.65); transform: rotate(-2deg); }
 .journal-photo {
-  flex: 0 0 auto; width: 76px; height: 76px;
+  flex: 0 0 auto; width: 70px; height: 70px;
   background: #fff;
   border: 1.5px solid #f6ccd8;
   border-radius: 8px;
@@ -29,16 +29,16 @@
   transform: rotate(-2deg);
   box-shadow: 0 3px 8px rgba(226, 138, 165, 0.22);
 }
-.journal-photo img { width: 60px; height: 60px; object-fit: contain; }
+.journal-photo img { width: 56px; height: 56px; object-fit: contain; }
 .journal-year {
-  font-family: Georgia, serif; font-size: 10px; letter-spacing: 3px;
-  color: #e08aa4; margin: 0 0 4px;
+  font-family: Georgia, serif; font-size: 14px; letter-spacing: 1px;
+  color: var(--kt-red-deep); margin: 0 0 4px;
 }
 .journal-title { font-size: 15.5px; color: #b2455f; margin: 0 0 5px; }
-.journal-note { font-size: 12.5px; line-height: 1.8; color: #9c6a80; margin: 0; }
+.journal-note { font-size: 14px; line-height: 1.8; color: var(--kt-brown-soft); margin: 0; }
 .journal-next {
-  text-align: center; font-size: 12.5px; color: #b2455f;
-  background: #fff;
-  border: 2px dashed #f3b9c8; border-radius: 14px;
-  padding: 12px; margin: 20px auto 0; max-width: 560px;
+  text-align: center; font-size: 14px; color: #b2455f;
+  padding: 4px 0; margin: 20px auto 0; max-width: 560px;
 }
+
+@media (min-width: 520px) { .journal-section { padding-inline: var(--page-gutter); } }

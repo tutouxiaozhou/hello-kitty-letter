@@ -28,6 +28,7 @@ export default function Rsvp() {
   const [wishes, setWishes] = useState("");
   const [error, setError] = useState("");
   const [snap, setSnap] = useState<Snapshot | null>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<number | null>(null);
 
   useEffect(
@@ -41,6 +42,7 @@ export default function Rsvp() {
     const trimmed = name.trim();
     if (!trimmed) {
       setError(rsvp.errors.name);
+      nameRef.current?.focus();
       return;
     }
     setError("");
@@ -66,9 +68,9 @@ export default function Rsvp() {
         : rsvp.rows.absent;
 
   return (
-    <section className="rsvp-section" aria-label="RSVP 回函明信片">
+    <section id="rsvp" tabIndex={-1} className="rsvp-section" aria-label="RSVP 回函明信片">
       <header className="section-head">
-        <h2>RSVP · 回函明信片</h2>
+        <h2>回函明信片</h2>
         <p className="section-sub">REPLY POSTCARD</p>
       </header>
 
@@ -117,12 +119,15 @@ export default function Rsvp() {
               {rsvp.nameLabel}
             </label>
             <input
+              ref={nameRef}
+              aria-invalid={!!error}
+              aria-describedby={error ? "rsvp-error" : undefined}
               id="rsvp-name"
               className="kt-input"
               value={name}
               maxLength={16}
               placeholder={rsvp.namePlaceholder}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => { setName(e.target.value); if (error) setError(""); }}
               autoComplete="name"
             />
 
@@ -169,7 +174,7 @@ export default function Rsvp() {
             />
 
             {error && (
-              <p className="form-error" role="alert">
+              <p id="rsvp-error" className="form-error" role="alert">
                 {error}
               </p>
             )}
@@ -189,7 +194,7 @@ export default function Rsvp() {
               <>
                 <div className="sent-card">
                   <h3 className="sent-title">{rsvp.successTitle}</h3>
-                  <p className="sent-desc">{rsvp.successDesc}</p>
+                  <p className="sent-desc">{snap.attendance === "yes" ? rsvp.successDesc : rsvp.absentSuccessDesc}</p>
                   <dl className="sent-rows">
                     <div>
                       <dt>{rsvp.rows.name}</dt>
@@ -224,7 +229,6 @@ export default function Rsvp() {
                     </li>
                   ))}
                 </ul>
-                <p className="caught-privacy">{rsvp.privacy}</p>
                 <button type="button" className="ghost-btn" onClick={reset}>
                   {rsvp.reset}
                 </button>

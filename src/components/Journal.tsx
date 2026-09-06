@@ -1,4 +1,4 @@
-import { INVITATION } from "../config";
+import { INVITATION, dateText } from "../config";
 import { asset } from "../lib/asset";
 import "../styles/journal.css";
 
@@ -7,19 +7,19 @@ const PAGES = [
     year: "2019",
     title: "相遇的那一页",
     note: "教室的门被推开，风铃响了一声——故事从这里开始贴胶带。",
-    sticker: asset("ip/face-hellokitty.png"),
+    sticker: asset("journal/meeting.svg"),
   },
   {
     year: "2022",
     title: "同居的那一页",
     note: "两个人的牙刷并肩站着，从那天起，每一天都自带甜味滤镜。",
-    sticker: asset("ip/face-mymelody.png"),
+    sticker: asset("journal/together.svg"),
   },
   {
     year: "2025",
     title: "求婚的那一页",
     note: "戒指藏在苹果派的旁边，她说「好」的时候派都没吃完。",
-    sticker: asset("ip/face-daniel.png"),
+    sticker: asset("journal/proposal.svg"),
   },
 ];
 
@@ -29,7 +29,7 @@ export function Journal() {
   return (
     <section className="journal-section" aria-labelledby="journal-title">
       <header className="section-head">
-        <h2 id="journal-title">📖 {couple.a} &amp; {couple.b} 的手账本</h2>
+        <h2 id="journal-title">{couple.a} &amp; {couple.b} 的手账本</h2>
         <p className="section-sub">Kitty 帮忙贴好了胶带，翻翻这几页</p>
       </header>
       <ol className="journal-pages">
@@ -48,7 +48,7 @@ export function Journal() {
         ))}
       </ol>
       <p className="journal-next">
-        下一页留白——10 月 6 日，一起来把它写满。
+        下一页留白——{dateText}，一起来把它写满。
       </p>
     </section>
   );
